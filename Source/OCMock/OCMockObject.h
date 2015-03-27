@@ -45,6 +45,8 @@
 
 - (instancetype)init;
 
+- (NSString *)invocationsDescription;
+
 - (void)setExpectationOrderMatters:(BOOL)flag;
 - (void)setRetainArguments:(BOOL)flag;
 
