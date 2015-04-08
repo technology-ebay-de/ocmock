@@ -89,6 +89,7 @@
 {
 	// no [super init], we're inheriting from NSProxy
 	expectationOrderMatters = NO;
+	expectationOrderMattersThrowsException = YES;
 	stubs = [[NSMutableArray alloc] init];
 	expectations = [[NSMutableArray alloc] init];
 	exceptions = [[NSMutableArray alloc] init];
@@ -135,6 +136,11 @@
 - (void)setExpectationOrderMatters:(BOOL)flag
 {
     expectationOrderMatters = flag;
+}
+
+- (void)setExpectationOrderMattersThrowsException:(BOOL)flag
+{
+    expectationOrderMattersThrowsException = flag;
 }
 
 - (void)setRetainArguments:(BOOL)flag
@@ -280,7 +286,8 @@
     @catch(NSException *e)
     {
         [exceptions addObject:e];
-        [e raise];
+        if(expectationOrderMattersThrowsException)
+            [e raise];
     }
 }
 
